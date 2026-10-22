@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#17152d">
+<title>بازی امیر | مأموریت و سرگرمی</title>
+<style>
+:root{color-scheme:dark;--bg:#111020;--panel:#1b1932;--line:#383452;--text:#f8f6ff;--muted:#b9b5d3;--accent:#9b87ff;--accent2:#6a55d9;--gold:#ffd66b}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at top,#28234c 0,#111020 55%);color:var(--text);font-family:Tahoma,Arial,sans-serif;line-height:1.7}button,select{font:inherit}button{cursor:pointer}.wrap{max-width:850px;margin:auto;padding:22px 16px 48px}.hero,.card{background:rgba(27,25,50,.94);border:1px solid var(--line);border-radius:20px;padding:20px;margin-bottom:16px}.hero{text-align:center;padding:30px 20px}.crown{font-size:56px}.eyebrow,.muted{color:var(--muted);font-size:13px}.title{font-size:clamp(28px,6vw,42px);margin:5px 0}.stats{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:20px}.stat{background:#121126;border:1px solid var(--line);border-radius:15px;padding:13px}.number{font-size:27px;font-weight:800}.btn{border:0;background:var(--accent);color:#17122e;font-weight:800;border-radius:12px;padding:11px 16px}.btn:hover{filter:brightness(1.07)}.btn:focus-visible,button:focus-visible,select:focus-visible{outline:3px solid var(--gold);outline-offset:2px}.btn.secondary{background:transparent;color:var(--text);border:1px solid var(--line)}.btn:disabled{opacity:.45;cursor:not-allowed}.coin{font-size:75px;border:0;background:transparent;display:block;margin:4px auto;touch-action:manipulation}.coin:active{transform:scale(.92)}.task{display:flex;align-items:center;gap:12px;padding:13px 0;border-bottom:1px solid var(--line)}.task:last-child{border-bottom:0}.emoji{font-size:30px}.task-main{flex:1;min-width:0}.task-title{font-weight:800}.tag{white-space:nowrap;color:var(--gold);font-size:13px}.challenge{margin-top:12px;padding:12px;background:#121126;border-radius:12px}.answers{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}.notice{border:1px solid #6a5931;background:#302817;color:#ffe8a8;border-radius:12px;padding:12px;font-size:13px}.field{width:100%;background:#121126;color:var(--text);border:1px solid var(--line);border-radius:12px;padding:12px;margin:6px 0 12px}.footer{text-align:center;color:var(--muted);font-size:12px;padding:12px}h2{margin:0 0 8px;font-size:21px}@media(max-width:430px){.task{gap:8px}.task .btn{padding:9px 10px}.hero,.card{padding:15px}.number{font-size:24px}}
+</style>
+</head>
+<body><main class="wrap">
+<section class="hero">
+<div class="crown" aria-hidden="true">👑</div>
+<div class="eyebrow">بازی سرگرمی و مأموریت</div>
+<h1 class="title">بازی امیر</h1>
+<p class="muted">بازی کن، معما حل کن و امتیاز آزمایشی جمع کن.</p>
+<div class="stats">
+<div class="stat"><div class="muted">امتیاز بازی</div><div class="number" id="points">۰</div></div>
+<div class="stat"><div class="muted">درآمد واقعی</div><div class="number">۰ €</div><div class="muted">پرداخت هنوز فعال نیست</div></div>
+</div>
+</section>
+<section class="card">
+<h2>🪙 شکار سکه</h2>
+<p class="muted">هر بار سکه را لمس کن و امتیاز بگیر.</p>
+<button id="coin" class="coin" aria-label="گرفتن یک سکه">🪙</button>
+<p style="text-align:center">تعداد لمس‌ها: <strong id="taps">۰</strong></p>
+<div style="text-align:center"><button id="tapReward" class="btn">گرفتن جایزه ۱۰ لمس</button></div>
+</section>
+<section class="card">
+<h2>🎯 مأموریت‌ها</h2>
+<div class="task"><span class="emoji">🧠</span><div class="task-main"><div class="task-title">معمای روز</div><div class="muted">پاسخ درست = ۱۰ امتیاز آزمایشی</div></div><button id="quiz" class="btn">شروع</button></div>
+<div id="challenge" class="challenge" hidden aria-live="polite"></div>
+</section>
+<section class="card">
+<h2>💳 راه‌اندازی درآمد واقعی</h2>
+<p class="muted">این وب‌سایت فعلاً نمونه‌ای قابل اجراست. برای پرداخت واقعی باید منبع درآمد معتبر، سرور امن، بررسی تقلب و سرویس پرداخت سازگار با قوانین کشور محل فعالیت متصل شوند.</p>
+<label for="country">کشور محل فعالیت</label>
+<select id="country" class="field"><option value="">انتخاب کشور</option><option value="de">آلمان</option><option value="ir">ایران</option><option value="other">کشور دیگر</option></select>
+<label for="method">روش درآمد موردنظر</label>
+<select id="method" class="field"><option value="ads">تبلیغات</option><option value="tasks">مأموریت و جایزه</option><option value="both">تبلیغات و مأموریت</option></select>
+<button id="setup" class="btn">نمایش مراحل بعدی</button>
+<div id="setupInfo" class="challenge" hidden aria-live="polite"></div>
+</section>
+<div class="notice">شفافیت: امتیازهای این نسخه پول واقعی نیستند و قابل برداشت نیستند. این صفحه هنوز روی اینترنت منتشر نشده و هیچ سرویس تبلیغاتی یا پرداختی به آن وصل نیست.</div>
+<div class="footer">بازی امیر · نسخه آزمایشی وب</div>
+</main>
+<script>
+(()=> {
+const $=id=>document.getElementById(id);
+const fmt=n=>String(n).replace(/[0-9]/g,d=>'۰۱۲۳۴۵۶۷۸۹'[Number(d)]);
+let points=0,taps=0,quizDone=false,tapRewardDone=false;
+function render(){$('points').textContent=fmt(points);$('taps').textContent=fmt(taps);$('tapReward').disabled=taps<10||tapRewardDone;if(tapRewardDone)$('tapReward').textContent='جایزه دریافت شد';}
+$('coin').addEventListener('click',()=>{taps++;points++;render();});
+$('tapReward').addEventListener('click',()=>{if(taps<10||tapRewardDone)return;tapRewardDone=true;points+=5;render();});
+$('quiz').addEventListener('click',()=>{
+ const box=$('challenge');box.hidden=false;box.replaceChildren();
+ if(quizDone){box.textContent='این معما قبلاً تکمیل شده است.';return;}
+ const q=document.createElement('p');q.textContent='حاصل ۱۳ منهای ۴ چند است؟';q.style.fontWeight='bold';box.append(q);
+ const answers=document.createElement('div');answers.className='answers';box.append(answers);
+ [7,9,10].forEach(n=>{const b=document.createElement('button');b.className='btn secondary';b.textContent=fmt(n);b.addEventListener('click',()=>{
+ if(n===9&&!quizDone){quizDone=true;points+=10;render();box.textContent='آفرین! ۱۰ امتیاز آزمایشی گرفتی 🎉';}
+ else if(!quizDone){let m=box.querySelector('.feedback');if(!m){m=document.createElement('p');m.className='feedback muted';box.append(m)}m.textContent='پاسخ درست نیست؛ دوباره امتحان کن.'}
+ });answers.append(b);});
+});
+$('setup').addEventListener('click',()=>{
+ const c=$('country').value,m=$('method').value,box=$('setupInfo');box.hidden=false;
+ if(!c){box.textContent='لطفاً کشور محل فعالیت را انتخاب کن.';return;}
+ const country=c==='de'?'آلمان':c==='ir'?'ایران':'کشور دیگر';
+ const method=m==='ads'?'تبلیغات':m==='tasks'?'مأموریت و جایزه':'تبلیغات و مأموریت';
+ box.textContent='انتخاب شما: '+country+'؛ '+method+'. مرحله بعد، بررسی شرایط سنی و قوانین، انتخاب میزبان و دامنه، ساخت سرور امن و اتصال سرویس درآمد و پرداخت واجد شرایط است. این مراحل هنوز انجام نشده‌اند.';
+});
+render();
+})();
+</script>
+</body></html>
